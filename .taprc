@@ -1,0 +1,6 @@
+# CI runs `npm test -- -c -t0`, but on PowerShell legs whose npm shim drops
+# the `--` separator the `-t0` never reaches tap, leaving its 30s per-file
+# default in force. The stack-exhaustion regression tests expand 10,000-level
+# nested payloads and take longer than that on slow runners, so disable the
+# per-file timeout here as well - the CI job's own timeout still applies.
+timeout: 0
